@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var catologo = [];
+      var resp;
+
+      do {
+        resp = prompt(
+          "1 - Adicionar novo produto\n 2 - Buscar produto\n 3 - Atualizar produto\n 4 - Apagar produto\n 5 - Sair"
+        );
+
+        if (resp == 1) {
+          var nome = prompt("Nome do produto");
+          var valor = prompt("Valor do produto");
+          var descriscao = prompt("Descrisção do produto");
+          produto = { nome, valor, descriscao };
+          alert("Produto adicionado com sucesso");
+          catologo.push(produto);
+        } else if (resp == 2) {
+          var nome = prompt("Nome do produto que deseja encontrar");
+          var prodEncontrado = catologo.find((produto) => produto.nome == nome);
+          if (prodEncontrado) {
+            alert(
+              `Nome: ${prodEncontrado.nome}\nValor: ${prodEncontrado.valor}\nDescrisção: ${prodEncontrado.descriscao}`
+            );
+          } else {
+            alert("Produto não encontrado");
+          }
+        } else if (resp == 3) {
+          var nome = prompt("Nome do produto que deseja atualizar");
+          var prodIndex = catologo.findIndex((produto) => produto.nome == nome);
+
+          if (prodIndex !== -1) {
+            // Verifica se o produto foi encontrado
+            var novoNome = prompt("Novo nome do produto");
+            var novoValor = prompt("Novo valor do produto");
+            var novaDesc = prompt("Nova descrição do produto");
+
+            // Atualiza as propriedades do produto encontrado
+            catologo[prodIndex].nome = novoNome;
+            catologo[prodIndex].valor = novoValor;
+            catologo[prodIndex].descricao = novaDesc; // Corrigido o nome da propriedade
+
+            alert("Produto atualizado com sucesso");
+          } else {
+            alert("Produto não encontrado");
+          }
+        } else if (resp == 4) {
+          var nome = prompt("Nome do produto que deseja apagar");
+          var prodIndex = catologo.findIndex((produto) => produto.nome == nome);
+          if (prodIndex == 0 || prodIndex != 0) {
+            catologo.splice(prodIndex, 1);
+            alert("Produto apagado");
+          } else {
+            alert("Produto não encontrado");
+          }
+        } else {
+          alert("Opção não encontrada");
+        }
+      } while (resp != 5);
+    </script>
+  </body>
+</html>
